@@ -76,43 +76,48 @@ const ProductDetails = ({ productId }) => {
   console.log("selectedProduct", selectedProduct);
 
   return (
-    <div className="p-6 w-full  ">
+    <div className="px-3 py-4 sm:p-6 w-full overflow-x-hidden">
       {selectedProduct && (
         <div className="max-w-8xl mx-auto bg-white p-8 rounded-lg ">
-          <div className="flex flex-col md:flex-row p-2 max-w-5xl mx-auto">
-            {/* LEFT THUMBNAILS */}
-            <div className="hidden md:flex flex-col pt-12 space-y-4 mr-6 ">
+          <div className="flex flex-col md:flex-row gap-6 max-w-6xl mx-auto px-3 sm:px-6">
+            {/* LEFT SECTION */}
+            <div className="md:w-1/2 w-full">
+              {/* MAIN IMAGE */}
+              <div className="w-full flex justify-center">
+                <img
+                  src={mainImage}
+                  alt="Main Product"
+                  className="w-full max-w-[320px] sm:max-w-[400px] rounded-2xl object-cover"
+                />
+              </div>
+
+              {/* MOBILE THUMBNAILS */}
+              <div className="flex md:hidden overflow-x-auto gap-3 mt-4 pb-2">
+                {selectedProduct.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image.url}
+                    alt=""
+                    className={`w-16 h-16 rounded-lg cursor-pointer border flex-shrink-0 ${
+                      mainImage === image.url
+                        ? "border-black"
+                        : "border-gray-300"
+                    }`}
+                    onClick={() => setMainImage(image.url)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* DESKTOP THUMBNAILS */}
+            <div className="hidden md:flex flex-col gap-3">
               {selectedProduct?.images?.map((image, index) => (
                 <img
                   key={index}
                   src={image.url}
-                  alt={image.altText || `Thumbnails ${index}`}
-                  className={`w-20 h-20 object bg-cover rounded-lg cursor-pointer border  ${
-                    mainImage === image.url ? "border-black" : "border-gray-400"
-                  }`}
-                  onClick={() => setMainImage(image.url)}
-                />
-              ))}
-            </div>
-            {/* MAIN IMAGE */}
-            <div className="md:w-1/2">
-              <div className="p-12">
-                <img
-                  src={mainImage}
-                  alt="Main Product"
-                  className="w-[350px] h-auto object-cover rounded-lg"
-                />
-              </div>
-            </div>
-            {/* MOBILE THUMBNAILS */}
-            <div className="md:hidden flex overscroll-x-scroll space-x-4 mb-4">
-              {selectedProduct.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image.url}
-                  alt={image.altText || `Thumbnails ${index}`}
-                  className={`w-20 h-20 object bg-cover rounded-lg cursor-pointer border ${
-                    mainImage === image.url ? "border-black" : "border-gray-400"
+                  alt=""
+                  className={`w-20 h-20 rounded-lg cursor-pointer border ${
+                    mainImage === image.url ? "border-black" : "border-gray-300"
                   }`}
                   onClick={() => setMainImage(image.url)}
                 />
@@ -120,128 +125,100 @@ const ProductDetails = ({ productId }) => {
             </div>
 
             {/* RIGHT SIDE */}
-            <div className="w-[400px] md:1/2 md:ml-10 p-10">
+            <div className="w-full md:w-1/2">
               {/* NAME */}
-              <h1 className="text-2xl md:text-3xl font-semibold mb-2">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-2">
                 {selectedProduct.name}
               </h1>
+
               {/* PRICE */}
-              <div className="flex flex-row gap-1 text-gray-500 text-xl">
-                <p className="text-lg text-gray-600 mb-1 line-through">
-                  {selectedProduct.originalPrice &&
-                    `${selectedProduct.originalPrice}`}
-                </p>
-              </div>
-              {/* PRICE */}
-              <p className="text-xl text-gray-500 mb-2">
-                ₹{selectedProduct.price}{" "}
-                <span className="line-through text-red-400 text-sm">
+              <p className="text-lg text-gray-500 mb-2">
+                ₹{selectedProduct.price}
+                <span className="line-through text-red-400 text-sm ml-2">
                   ₹{selectedProduct.discountPrice}
                 </span>
               </p>
 
               {/* DESCRIPTION */}
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4 text-sm sm:text-base">
                 {selectedProduct.description}
               </p>
+
               {/* COLOR */}
-              <div className="mb-4 ">
-                <p className="text-gray-700 ">COLOR :</p>
-                <div className="flex gap-2 mt-2">
+              <div className="mb-4">
+                <p className="text-gray-700 text-sm">COLOR :</p>
+                <div className="flex gap-2 mt-2 flex-wrap">
                   {selectedProduct?.colors?.map((color) => (
                     <button
                       key={color}
                       onClick={() => setSelectedColor(color)}
-                      className={`w-8 h-8 rounded-full border ${
+                      className={`w-7 h-7 rounded-full border ${
                         selectedColor === color
                           ? "border-4 border-black"
                           : "border-gray-300"
                       }`}
-                      style={{
-                        backgroundColor: color.toLocaleLowerCase(),
-                        filter: "brightness(0.5)",
-                      }}
-                    ></button>
+                      style={{ backgroundColor: color.toLowerCase() }}
+                    />
                   ))}
                 </div>
               </div>
-              {/* COLOR END */}
+
               {/* SIZE */}
               <div className="mb-4">
-                <p className="text-gray-700">SIZE :</p>
-                <div className="flex gap-2 mt-2 ">
+                <p className="text-gray-700 text-sm">SIZE :</p>
+                <div className="flex gap-2 mt-2 flex-wrap">
                   {selectedProduct?.sizes?.map((size) => (
                     <button
                       key={size}
-                      className={`relative px-4 py-2 rounded border overflow-hidden z-10 transition-all duration-500 ${
-                        selectedSize === size ? "text-white" : "text-black"
-                      }`}
                       onClick={() => setSelectedSize(size)}
+                      className={`px-3 py-1 rounded border text-sm ${
+                        selectedSize === size
+                          ? "bg-black text-white"
+                          : "bg-white text-black"
+                      }`}
                     >
-                      <span className="relative z-10">{size}</span>
-                      {/* Background Fill Animation */}
-                      <span
-                        className={`absolute inset-0 bg-black transform transition-transform duration-500 z-0 ${
-                          selectedSize === size ? "scale-x-100" : "scale-x-0"
-                        } origin-left`}
-                      ></span>
+                      {size}
                     </button>
                   ))}
                 </div>
               </div>
-              {/* SIZE END */}
-              {/* Quantity Start */}
-              <div className="mb-6 ">
-                <p className="text-gray-700 ">Quantity :</p>
-                <div className="flex items-center space-x-2">
+
+              {/* QUANTITY */}
+              <div className="mb-6">
+                <p className="text-gray-700 text-sm">Quantity :</p>
+                <div className="flex items-center gap-2 mt-2">
                   <button
-                    onClick={() => setQuantity(Math.max(quantity - 1, 0))}
-                    className="w-8 h-8 bg-gray-200 rounded text-lg flex items-center justify-center"
+                    onClick={() => setQuantity(Math.max(quantity - 1, 1))}
+                    className="w-8 h-8 bg-gray-200 rounded"
                   >
                     -
                   </button>
-
-                  <span className="w-6 text-center">{quantity}</span>
-
+                  <span>{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-8 h-8 bg-gray-200 rounded text-lg flex items-center justify-center"
+                    className="w-8 h-8 bg-gray-200 rounded"
                   >
                     +
                   </button>
                 </div>
               </div>
-              {/* Quantity End */}
-              {/* ADD TO CART BUTTON */}
+
+              {/* BUTTON */}
               <button
                 onClick={handelAddToCart}
                 disabled={isButtonDisabled}
-                className={`relative overflow-hidden group text-black py-2 px-6 rounded w-full mb-4 border border-black font-semibold bg-gray-100 ${
-                  isButtonDisabled ? "cursor-not-allowed opacity-50" : ""
-                }`}
+                className="w-full bg-black text-white py-2 rounded mb-4"
               >
-                <span className="relative z-10 transition-all duration-300 group-hover:text-white">
-                  {isButtonDisabled ? "ADDING..." : "ADD TO CART"}
-                </span>
-                <span className="absolute inset-0 bg-black scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 z-0"></span>
+                {isButtonDisabled ? "ADDING..." : "ADD TO CART"}
               </button>
-              {/* ADD TO CART BUTTON END  */}
-              <div className="mt-10 text-gray-700 ">
-                <h3 className="text-xl font-bold mb-4 text-rose-400">
+
+              {/* DETAILS */}
+              <div className="mt-6 text-sm text-gray-700">
+                <h3 className="font-bold mb-2 text-rose-400">
                   CHARACTERISTIC :
                 </h3>
-                <table className="w-full text-left text-sm text-gray-600">
-                  <tbody>
-                    <tr>
-                      <td className="py-1 text-gray-500">BRAND</td>
-                      <td className="py-1 ">{selectedProduct.brand}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-1 text-gray-500">MATERIAL</td>
-                      <td className="py-1">{selectedProduct.material}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <p>Brand: {selectedProduct.brand}</p>
+                <p>Material: {selectedProduct.material}</p>
               </div>
             </div>
           </div>
@@ -253,7 +230,7 @@ const ProductDetails = ({ productId }) => {
               </span>
             </h2>
             <div
-              className="w-[60%] mx-auto mb-10 h-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+              className="w-[90%] sm:w-[70%] md:w-[60%] mx-auto mb-10 h-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
     [clip-path:polygon(0%_50%,10%_0%,90%_0%,100%_50%,90%_100%,10%_100%)]"
             ></div>
             <ProductGrid
