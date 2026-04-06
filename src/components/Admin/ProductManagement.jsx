@@ -23,12 +23,6 @@ const ProductManagement = () => {
     dispatch(fetchAdminProducts());
   }, [dispatch]);
 
-  const handelDelete = (id) => {
-    if (window.confirm("Are You Sure to Delete This Product..?")) {
-      dispatch(deleteProduct(id));
-    }
-  };
-
   if (loading)
     return (
       <div className="text-center p-6">
@@ -166,7 +160,10 @@ const ProductManagement = () => {
                 </Link>
 
                 <button
-                  onClick={() => handelDelete(product._id)}
+                  onClick={() => {
+                    setSelectedUserId(product._id);
+                    setIsModalOpen(true);
+                  }}
                   className="flex-1 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-all duration-300"
                 >
                   DELETE
