@@ -12,7 +12,7 @@ const GenderWiseProduct = () => {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}api/products?collection=all&gender=${gender}`)
+    fetch(`${BASE_URL}/api/products?collection=all&gender=${gender}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [gender]);
