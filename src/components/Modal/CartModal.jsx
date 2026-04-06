@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import CartContents from "../Cart/CartContents";
-import Modal from "../modal";
+import Modal from "../Modal";
 
 const CartModal = ({
   drawerOpen,

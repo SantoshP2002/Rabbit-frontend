@@ -1,5 +1,5 @@
 import Checkout from "../Cart/Checkout";
-import Modal from "../modal";
+import Modal from "../Modal";
 
 const CheckoutModal = ({ isOpen, onClose }) => {
   return (
