@@ -39,6 +39,13 @@ const ProductDetails = ({ productId }) => {
 
   // ADD TO CART HANDEL
   const handelAddToCart = () => {
+    if (!user) {
+      toast.error("Please login to add product to cart.", {
+        duration: 2000,
+      });
+      return;
+    }
+
     if (!selectedSize || !selectedColor) {
       toast.error("Please Select SIZE & COLOR.", {
         duration: 2000,
