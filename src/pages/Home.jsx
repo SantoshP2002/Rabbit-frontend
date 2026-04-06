@@ -12,50 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByFilters } from "../redux/slice/productsSlice";
 import axios from "axios";
 import ProgressLoader from "../components/LoadingScreen";
-
-const banners = [
-  {
-    id: 1,
-    title: "Summer Sale",
-    subtitle: "Up to 50% Off",
-    image:
-      "https://img.freepik.com/free-vector/summer-colection-banner-with-hand-drawn-flowers_1188-312.jpg",
-  },
-  {
-    id: 2,
-    title: "New Arrivals",
-    subtitle: "Latest Trends",
-    image:
-      "https://strapi-wasabi-bucket-prod-cdn.phot.ai/large_Showcase_New_Arrivals_with_AI_Fashion_Banner_Maker_047bd356df.webp",
-  },
-  {
-    id: 3,
-    title: "Electronics",
-    subtitle: "Smart Deals",
-    image:
-      "https://img.freepik.com/free-psd/neon-banner-template-clothing-store-sale_23-2149001696.jpg?semt=ais_rp_progressive&w=740&q=80",
-  },
-  {
-    id: 4,
-    title: "Shoes",
-    subtitle: "Comfort & Style",
-    image:
-      "https://img.freepik.com/free-vector/modern-black-friday-sale-banner-template-with-3d-background-red-splash_1361-1877.jpg?semt=ais_incoming&w=740&q=80",
-  },
-  {
-    id: 5,
-    title: "Watches",
-    subtitle: "Luxury Picks",
-    image: "https://sylvi.in/cdn/shop/articles/85_1.jpg?v=1676549659",
-  },
-  {
-    id: 6,
-    title: "Accessories",
-    subtitle: "Complete Your Look",
-    image:
-      "https://cdn.dribbble.com/userupload/9839613/file/original-d2dfdc4f45b4f795f705834dfc70801d.jpg?resize=752x&vertical=center",
-  },
-];
+import { banners } from "../constants";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -86,16 +43,16 @@ const Home = () => {
     fetchBestSeller();
   }, [dispatch]);
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Hero />
       <GenderCollectionSection />
       <NewArrivals />
       {/* Best Seller */}
-      <h2 className="text-3xl text-center text-gray-400 font-bold mb-1">
+      <h2 className="text-xl sm:text-2xl md:text-3xl text-center text-gray-400 font-bold mb-1">
         BESTSELLER
       </h2>
       <div
-        className="w-[60%] mx-auto h-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+        className="w-[90%] sm:w-[70%] md:w-[60%] mx-auto h-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
     [clip-path:polygon(0%_50%,10%_0%,90%_0%,100%_50%,90%_100%,10%_100%)]"
       ></div>
       {bestSellerProduct ? (
@@ -106,14 +63,14 @@ const Home = () => {
         </p>
       )}
       {/* Explore Our Collections */}
-      <div className="max-w-7xl mx-auto p-4 my-10 rounded-lg">
+      <div className="max-w-7xl mx-auto px-3 py-4 sm:p-4 my-10 rounded-lg">
         <h2 className="text-3xl md:text-3xl font-bold text-gray-800 text-center mb-1">
           <span className="text-rose-400 text-3xl">Explore</span> Our
           Collections
         </h2>
         {/* NEEDLE LINE  */}
         <div
-          className="w-[80%] mx-auto mb-10 h-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+          className="w-[95%] sm:w-[85%] md:w-[80%] mx-auto mb-10 h-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
     [clip-path:polygon(0%_50%,10%_0%,90%_0%,100%_50%,90%_100%,10%_100%)]"
         ></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
@@ -130,7 +87,7 @@ const Home = () => {
               <img
                 src={banner.image}
                 alt={banner.title}
-                className="w-full h-56 object-cover group-hover:scale-110 transition duration-500"
+                className="w-full h-40 sm:h-48 md:h-56 object-cover group-hover:scale-110 transition duration-500"
               />
 
               {/* Gradient Overlay */}
@@ -153,7 +110,7 @@ const Home = () => {
           Top Wear's For Women
         </h2>
         <div
-          className="w-[60%] mx-auto mb-10 h-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+          className="w-[90%] sm:w-[70%] md:w-[60%] mx-auto mb-10 h-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
     [clip-path:polygon(0%_50%,10%_0%,90%_0%,100%_50%,90%_100%,10%_100%)]"
         ></div>
         <ProductGrid products={products} loading={loading} error={error} />
