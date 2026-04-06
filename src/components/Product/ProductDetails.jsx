@@ -222,6 +222,7 @@ const ProductDetails = ({ productId }) => {
               </div>
             </div>
           </div>
+          {/* ======================== YOU MAY ALSO LIKE ======================== */}
           <div className="mt-20 ">
             <h2 className="text-2xl text-center font-medium mb-1 ">
               YOU MAY ALSO{" "}
