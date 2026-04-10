@@ -34,29 +34,28 @@ export const fetchProductsByFilters = createAsyncThunk(
 
     // Fetch the products
     const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_URL}/api/products?${query.toString()}`
+      `${import.meta.env.VITE_BACKEND_URL}/api/products?${query.toString()}`,
     );
     return response.data;
-  }
+  },
 );
 
 // Async thunk to fetch a single Product by ID
 // Fetch Date from Backend using Axios get request by ID
 export const fetchProductDetails = createAsyncThunk(
   "products/fetchProductDetails",
-  async ( {id} ) => {
-    console.log("Fetching Product",id);
+  async ({ id }) => {
     const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`
+      `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`,
     );
     return response.data;
-  }
+  },
 );
 
 // Async thunk to update a product (PUT request)
 export const updateProducts = createAsyncThunk(
   "products/updateProducts",
-  async ({id, productData}) => {
+  async ({ id, productData }) => {
     const response = await axios.put(
       `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`,
       productData,
@@ -64,23 +63,21 @@ export const updateProducts = createAsyncThunk(
         headers: {
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
         },
-      }
+      },
     );
     return response.data;
-  }
+  },
 );
 
 // Async thunk to fetch similar Products
 export const fetchSimilarProducts = createAsyncThunk(
   "products/fetchSimilarProducts",
   async ({ id }) => {
-    console.log("Fetching Product/similar", id);
-    
     const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${id}`
+      `${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${id}`,
     );
     return response.data;
-  }
+  },
 );
 
 const productsSlice = createSlice({
@@ -169,7 +166,7 @@ const productsSlice = createSlice({
         state.loading = false;
         const updatedProduct = action.payload;
         const index = state.products.findIndex(
-          (product) => product._id === updatedProduct._id
+          (product) => product._id === updatedProduct._id,
         );
         if (index !== -1) {
           state.products[index] = updatedProduct;
