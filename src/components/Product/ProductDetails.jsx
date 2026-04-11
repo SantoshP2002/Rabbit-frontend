@@ -9,7 +9,7 @@ import {
 } from "../../redux/slice/productsSlice";
 import { addToCart } from "../../redux/slice/cartSlice";
 import ProductReviews from "./ProductReviews";
-// import AllReviews from "./AllReviews";
+import AllReviews from "./AllReviews";
 
 const ProductDetails = ({ productId }) => {
   const { id } = useParams();
@@ -255,7 +255,9 @@ const ProductDetails = ({ productId }) => {
       <div>
         <ProductReviews reviews={selectedProduct?.reviews || []} />
       </div>
-      <div>{/* <AllReviews/> */}</div>
+      <div>
+        <AllReviews />
+      </div>
     </div>
   );
 };
