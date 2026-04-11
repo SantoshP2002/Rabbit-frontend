@@ -1,7 +1,11 @@
 import { useState, useMemo, useEffect } from "react";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { createReview, fetchReview } from "../../redux/slice/reviewSlice";
+import {
+  createReview,
+  fetchReview,
+  resetReviewState,
+} from "../../redux/slice/reviewSlice";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -36,6 +40,7 @@ const ProductReviews = () => {
   useEffect(() => {
     if (success) {
       toast.success("Review submitted successfully!");
+      dispatch(resetReviewState());
     }
     if (error) {
       toast.error(
@@ -44,7 +49,7 @@ const ProductReviews = () => {
           : "You already reviewed this product.",
       );
     }
-  }, [success, error]);
+  }, [success, error, dispatch]);
 
   // 📊 Stats
   const stats = useMemo(() => {

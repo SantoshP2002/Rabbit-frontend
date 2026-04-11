@@ -51,7 +51,12 @@ const reviewSlice = createSlice({
     error: null,
     success: false,
   },
-  reducers: {},
+  reducers: {
+    resetReviewState: (state) => {
+      state.success = false;
+      state.error = null;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -87,3 +92,4 @@ const reviewSlice = createSlice({
 });
 
 export default reviewSlice.reducer;
+export const { resetReviewState } = reviewSlice.actions;
