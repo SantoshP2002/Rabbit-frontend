@@ -20,7 +20,7 @@ const AllReviews = () => {
   }, [dispatch, id]);
 
   return (
-    <div className="w-full px-3 sm:px-6 lg:px-10 py-8 sm:py-10 bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="w-full px-3 sm:px-6 lg:px-10 py-8 sm:py-10 bg-gradient-to-br from-sky-100 to-red-100 rounded-3xl shadow-4xl">
       {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -20 }}

@@ -131,7 +131,7 @@ const ProductReviews = () => {
   };
 
   return (
-    <div className="mx-auto px-5 py-12 text-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl shadow-lg">
+    <div className="mx-auto px-5 py-12 text-center">
       <h2 className="text-3xl font-extrabold mb-8 tracking-wide">
         Customer Reviews
       </h2>
@@ -211,7 +211,7 @@ const ProductReviews = () => {
             : "max-h-0 opacity-0 scale-95"
         }`}
       >
-        <div className="rounded-2xl p-8 bg-white shadow-xl border border-gray-200 backdrop-blur-md">
+        <div className="rounded-2xl p-8 shadow-xl backdrop-blur-md">
           <h3 className="text-2xl font-bold mb-6 text-center">
             Write a Review
           </h3>
