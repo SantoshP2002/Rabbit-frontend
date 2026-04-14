@@ -235,12 +235,12 @@ const ProductReviews = () => {
                   onClick={() => setRating(star)}
                   onMouseEnter={() => setHover(star)}
                   onMouseLeave={() => setHover(0)}
-                  className="border-2 border-black px-3 py-2 rounded-lg shadow-[3px_3px_0_0_#000] transition-all duration-200 hover:scale-110 hover:bg-yellow-100"
+                  className="border-2 border-black px-3 py-2 rounded-lg shadow-[3px_3px_0_0_#000] transition-all duration-200 hover:scale-110 "
                 >
                   {star <= (hover || rating) ? (
-                    <FaStar className="text-yellow-400 text-2xl" />
+                    <FaStar className="text-black text-2xl" />
                   ) : (
-                    <FaRegStar className="text-yellow-400 text-2xl" />
+                    <FaRegStar className="text-gray-700 text-2xl" />
                   )}
                 </button>
               ))}
