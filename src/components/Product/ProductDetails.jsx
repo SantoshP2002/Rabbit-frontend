@@ -172,21 +172,31 @@ const ProductDetails = ({ productId }) => {
                 </div>
               </div>
 
-              {/* SIZE */}
               <div className="mb-4">
                 <p className="text-gray-700 text-sm">SIZE :</p>
+
                 <div className="flex gap-2 mt-2 flex-wrap">
                   {selectedProduct?.sizes?.map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`px-3 py-1 rounded border text-sm ${
-                        selectedSize === size
-                          ? "bg-black text-white"
-                          : "bg-white text-black"
-                      }`}
+                      className="relative overflow-hidden px-3 py-1 rounded border text-sm group"
                     >
-                      {size}
+                      {/* Animated background */}
+                      <span
+                        className={`absolute inset-0 bg-black transition-all duration-300 ${
+                          selectedSize === size ? "w-full" : "w-0"
+                        }`}
+                      ></span>
+
+                      {/* Text */}
+                      <span
+                        className={`relative z-10 ${
+                          selectedSize === size ? "text-white" : "text-black"
+                        }`}
+                      >
+                        {size}
+                      </span>
                     </button>
                   ))}
                 </div>
