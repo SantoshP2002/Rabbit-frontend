@@ -13,6 +13,14 @@ const ProductReviews = () => {
   const dispatch = useDispatch();
   const { id } = useParams(); // ✅ productId
 
+  const [emailError, setEmailError] = useState("");
+  const [emailTouched, setEmailTouched] = useState(false);
+
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const { reviews, loading, success, error } = useSelector(
     (state) => state.review,
   );
@@ -295,6 +303,7 @@ const ProductReviews = () => {
 
           {/* Name */}
           <div className="flex gap-6 mb-4 mt-5">
+            {/* NAME INPUT */}
             <input
               type="text"
               placeholder="Enter Your Name"
@@ -304,15 +313,38 @@ const ProductReviews = () => {
               }
               className="w-full px-5 py-3 bg-white/80 backdrop-blur-md text-black border border-gray-300 rounded-xl focus:outline-none transition-all duration-300 ease-in-out placeholder:text-gray-400 hover:shadow-md focus:shadow-lg focus:scale-[1.02]"
             />
-            <input
-              type="text"
-              placeholder="Enter Your Email"
-              value={reviewData.email}
-              onChange={(e) =>
-                setReviewData({ ...reviewData, email: e.target.value })
-              }
-              className="w-full px-5 py-3 bg-white/80 backdrop-blur-md text-black border border-gray-300 rounded-xl focus:outline-none transition-all duration-300 ease-in-out placeholder:text-gray-400 hover:shadow-md focus:shadow-lg focus:scale-[1.02]"
-            />
+
+            {/* EMAIL INPUT + ERROR */}
+            <div className="w-full flex flex-col">
+              <input
+                type="email"
+                placeholder="Enter Your Email"
+                value={reviewData.email}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setReviewData({ ...reviewData, email: value });
+                }}
+                onBlur={() => {
+                  setEmailTouched(true);
+
+                  if (!validateEmail(reviewData.email)) {
+                    setEmailError("Please enter a valid email...");
+                  } else {
+                    setEmailError("");
+                  }
+                }}
+                className={`w-full px-5 py-3 bg-white/80 backdrop-blur-md text-black border rounded-xl focus:outline-none transition-all duration-300 ease-in-out placeholder:text-gray-400 hover:shadow-md focus:shadow-lg focus:scale-[1.02] ${
+                  emailError && emailTouched
+                    ? "border-red-500"
+                    : "border-gray-300"
+                }`}
+              />
+
+              {/* Error Message */}
+              {emailError && emailTouched && (
+                <p className="text-red-500 text-sm mt-1">{emailError}</p>
+              )}
+            </div>
           </div>
 
           {/* Buttons */}
