@@ -155,9 +155,9 @@ const ProductReviews = () => {
           <div className="flex items-center gap-1 mt-2">
             {[1, 2, 3, 4, 5].map((star) =>
               star <= Math.round(stats.average) ? (
-                <FaStar key={star} className="text-yellow-400 animate-pulse" />
+                <FaStar key={star} className="text-black animate-pulse" />
               ) : (
-                <FaRegStar key={star} className="text-yellow-400" />
+                <FaRegStar key={star} className="text-gray-400" />
               ),
             )}
           </div>
@@ -180,12 +180,12 @@ const ProductReviews = () => {
               >
                 <div className="flex items-center w-14 justify-end font-medium">
                   <span>{star}</span>
-                  <FaStar className="text-yellow-400 ml-1" />
+                  <FaStar className="text-black ml-1" />
                 </div>
 
                 <div className="relative w-52 h-3 bg-gray-200 rounded-full overflow-hidden">
                   <div
-                    className="absolute left-0 top-0 h-3 bg-gradient-to-r from-yellow-300 to-yellow-500 rounded-full transition-all duration-700 ease-out group-hover:scale-x-105 origin-left"
+                    className="absolute left-0 top-0 h-3 bg-gradient-to-r from-gray-400 to-black rounded-full transition-all duration-700 ease-out group-hover:scale-x-105 origin-left"
                     style={{ width: `${percentage}%` }}
                   />
                 </div>
