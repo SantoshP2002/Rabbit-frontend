@@ -20,16 +20,7 @@ const AllReviews = () => {
   }, [dispatch, id]);
 
   return (
-    <div className="w-full px-3 sm:px-6 lg:px-10 py-8 sm:py-10 bg-gradient-to-br from-sky-100 to-red-100 rounded-3xl shadow-4xl">
-      {/* Heading */}
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-8"
-      >
-        All Reviews
-      </motion.h2>
-
+    <div>
       {/* Loading */}
       {loading && (
         <p className="text-center text-gray-500 animate-pulse">
@@ -48,35 +39,33 @@ const AllReviews = () => {
       )}
 
       {/* Reviews List */}
-      <div className="space-y-4 sm:space-y-6 max-w-4xl mx-auto">
+      <div className="w-full max-w-6xl mx-auto">
+        <p className="text-xl mb-4"> Reviews : </p>
         {reviews.map((review, index) => (
           <motion.div
             key={review._id}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            className="bg-white rounded-2xl shadow-md p-4 sm:p-6 border hover:shadow-lg transition"
+            className="pb-6 mb-6 border-b border-gray-400 last:border-none last:mb-0 last:pb-0"
           >
             {/* ⭐ Rating */}
             <div className="flex items-center mb-2 gap-1">
               {[...Array(5)].map((_, i) =>
                 i < review.rating ? (
-                  <FaStar
-                    key={i}
-                    className="text-yellow-400 text-sm sm:text-base"
-                  />
+                  <FaStar key={i} className="text-black text-sm sm:text-base" />
                 ) : (
                   <FaRegStar
                     key={i}
-                    className="text-yellow-400 text-sm sm:text-base"
+                    className="text-black text-sm sm:text-base"
                   />
                 ),
               )}
             </div>
 
             {/* 👤 Name */}
-            <h3 className="text-base sm:text-lg font-semibold flex items-center gap-2 text-gray-800">
-              <FiUser className="text-xl sm:text-2xl text-gray-500" />
+            <h3 className="text-sm flex items-center gap-2 text-gray-800">
+              <FiUser className="text-xl sm:text-3xl text-gray-500" />
               {review.name || "Anonymous"}
             </h3>
 
@@ -86,7 +75,7 @@ const AllReviews = () => {
             </p>
 
             {/* 💬 Description */}
-            <p className="text-sm sm:text-base text-gray-600 mt-1 leading-relaxed">
+            <p className="text-sm text-black mt-1 leading-relaxed">
               {review.description}
             </p>
 
